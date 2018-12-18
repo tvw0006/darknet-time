@@ -22,10 +22,10 @@ This repository supports:
 
 ##### Examples of How to use on the command line:
 
-On Linux use `./darknet` instead of `darknet.exe`, like this:`./darknet detector test ./cfg/coco.data ./cfg/yolov3.cfg ./yolov3.weights`
+On Linux use `./darknet` instead of `darknet.exe`, like this:`./darknet detector test data/obj.data yolo-obj.cfg yolo-obj.weights`
 
 * Run on WebCam 0: `darknet.exe detector demo data/obj.data yolo-obj.cfg yolo-obj.weights -c 0`
-* Run on Image: `darknet.exe test cfg/yolov3.cfg yolov3.weights -i 0 -thresh 0.25`
+* Run on Image: `darknet.exe test data/obj.data yolo-obj.cfg yolo-obj.weights -i 0 -thresh 0.25`
 
 ##### For using network video-camera mjpeg-stream with any Android smartphone:
 
