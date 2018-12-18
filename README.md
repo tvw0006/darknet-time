@@ -22,10 +22,10 @@ This repository supports:
 
 ##### Examples of How to use on the command line:
 
-On Linux use `./darknet` instead of `darknet.exe`, like this:`./darknet detector test ./cfg/coco.data ./cfg/yolov3.cfg ./yolov3.weights`
+On Linux use `./darknet` instead of `darknet.exe`, like this:`./darknet detector test data/obj.data yolo-obj.cfg yolo-obj.weights`
 
 * Run on WebCam 0: `darknet.exe detector demo data/obj.data yolo-obj.cfg yolo-obj.weights -c 0`
-* Run on Image: `darknet.exe test cfg/yolov3.cfg yolov3.weights -i 0 -thresh 0.25`
+* Run on Image: `darknet.exe test data/obj.data yolo-obj.cfg yolo-obj.weights -i 0 -thresh 0.25`
 
 ##### For using network video-camera mjpeg-stream with any Android smartphone:
 
@@ -40,7 +40,7 @@ On Linux use `./darknet` instead of `darknet.exe`, like this:`./darknet detector
 4. Replace the address below, on shown in the phone application (Smart WebCam) and launch:
 
 
-* Yolo v3 COCO-model: `darknet.exe detector demo data/coco.data yolov3.cfg yolov3.weights http://192.168.0.80:8080/video?dummy=param.mjpg -i 0`
+* Time Magazine Model: `darknet.exe detector demo data/obj.data yolo-obj.cfg yolo-obj.weights http://192.168.1.2:8080/video?dummy=param.mjpg -i 0
 
 ### How to compile on Windows:
 
@@ -73,36 +73,19 @@ On Linux use `./darknet` instead of `darknet.exe`, like this:`./darknet detector
     
     **Note:** CUDA must be installed only after that MSVS2015 had been installed.
 
-Training to Detect custom objects:
+### Training to Detect custom objects:
 
 1. In Darknet-master\build\darknet\64, Create file `yolo-obj.cfg` 
 
   * change line batch to [`batch=64`](https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L3)
   * change line subdivisions to [`subdivisions=8`](https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L4)
-  * change line `classes=80` to your number of objects in each of 3 `[yolo]`-layers:
-      * https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L610
-      * https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L696
-      * https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L783
-  * change [`filters=255`] to filters=(classes + 5)x3 in the 3 `[convolutional]` before each `[yolo]` layer
-      * https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L603
-      * https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L689
-      * https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L776
+  * change line `classes=X` to your number of objects/
+  * change [`filters=x`] to filters=(classes + 5)x3
 
-  So if `classes=1` then should be `filters=18`. If `classes=2` then write `filters=21`.
+  So if `classes=1` then should be `filters=30`. If `classes=2` then write `filters=35`.
   
   **(Do not write in the cfg-file: filters=(classes + 5)x3)**
   
-  (Generally `filters` depends on the `classes`, `coords` and number of `mask`s, i.e. filters=`(classes + coords + 1)*<number of mask>`, where `mask` is indices of anchors. If `mask` is absence, then filters=`(classes + coords + 1)*num`)
-
-  So for example, for 2 objects, your file `yolo-obj.cfg` should differ from `yolov3.cfg` in such lines in each of **3** [yolo]-layers:
-
-  ```
-  [convolutional]
-  filters=21
-
-  [region]
-  classes=2
-  ```
 
 2. Create or edit file `obj.names` in the directory `build\darknet\x64\data\`, with objects names - each in new line
 
