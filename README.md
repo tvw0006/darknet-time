@@ -79,30 +79,13 @@ On Linux use `./darknet` instead of `darknet.exe`, like this:`./darknet detector
 
   * change line batch to [`batch=64`](https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L3)
   * change line subdivisions to [`subdivisions=8`](https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L4)
-  * change line `classes=80` to your number of objects in each of 3 `[yolo]`-layers:
-      * https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L610
-      * https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L696
-      * https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L783
-  * change [`filters=255`] to filters=(classes + 5)x3 in the 3 `[convolutional]` before each `[yolo]` layer
-      * https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L603
-      * https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L689
-      * https://github.com/AlexeyAB/darknet/blob/0039fd26786ab5f71d5af725fc18b3f521e7acfd/cfg/yolov3.cfg#L776
+  * change line `classes=X` to your number of objects/
+  * change [`filters=x`] to filters=(classes + 5)x3
 
-  So if `classes=1` then should be `filters=18`. If `classes=2` then write `filters=21`.
+  So if `classes=1` then should be `filters=30`. If `classes=2` then write `filters=35`.
   
   **(Do not write in the cfg-file: filters=(classes + 5)x3)**
   
-  (Generally `filters` depends on the `classes`, `coords` and number of `mask`s, i.e. filters=`(classes + coords + 1)*<number of mask>`, where `mask` is indices of anchors. If `mask` is absence, then filters=`(classes + coords + 1)*num`)
-
-  So for example, for 2 objects, your file `yolo-obj.cfg` should differ from `yolov3.cfg` in such lines in each of **3** [yolo]-layers:
-
-  ```
-  [convolutional]
-  filters=21
-
-  [region]
-  classes=2
-  ```
 
 2. Create or edit file `obj.names` in the directory `build\darknet\x64\data\`, with objects names - each in new line
 
