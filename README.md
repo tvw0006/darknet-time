@@ -73,7 +73,7 @@ On Linux use `./darknet` instead of `darknet.exe`, like this:`./darknet detector
     
     **Note:** CUDA must be installed only after that MSVS2015 had been installed.
 
-Training to Detect custom objects:
+### Training to Detect custom objects:
 
 1. In Darknet-master\build\darknet\64, Create file `yolo-obj.cfg` 
 
