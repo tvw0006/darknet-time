@@ -40,7 +40,7 @@ On Linux use `./darknet` instead of `darknet.exe`, like this:`./darknet detector
 4. Replace the address below, on shown in the phone application (Smart WebCam) and launch:
 
 
-* Yolo v3 COCO-model: `darknet.exe detector demo data/coco.data yolov3.cfg yolov3.weights http://192.168.0.80:8080/video?dummy=param.mjpg -i 0`
+* Time Magazine Model: `darknet.exe detector demo data/obj.data yolo-obj.cfg yolo-obj.weights http://192.168.1.2:8080/video?dummy=param.mjpg -i 0
 
 ### How to compile on Windows:
 
